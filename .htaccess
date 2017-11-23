@@ -1,0 +1,7 @@
+DirectoryIndex app.php
+
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^app.php/$1 [L]
+    RewriteRule . /app.php [L]
+</IfModule>

@@ -1,0 +1,10 @@
+Caleb Notes:
+    Using LAMPP
+    Server name is cs4430.local
+    Setup virtual host
+    Setup hosts file
+    may have to stop mysql-server by:
+        $ sudo service mysql stop
+    start with sudo /opt/lampp/lampp start
+    htaccess
+        redirects all through app.php
