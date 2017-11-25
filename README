@@ -1,3 +1,24 @@
+Lampp Setup:
+    install lampp from https://www.apachefriends.org/xampp-files/7.1.11/xampp-linux-x64-7.1.11-0-installer.run
+    edit /etc/hosts
+        add:
+            127.0.0.1   cs4430.local
+    edit /opt/lampp/etc/httpd.conf
+        uncomment "LoadModule rewrite_module modules/mod_rewrite.so"
+        TODO REMOVE change all "AllowOverride" to "AllowOverride All"
+    sudo chown -R $USER:$USER /opt/lampp/htdocs/
+    save project folder into /opt/lampp/htdocs/cs4430
+    add to /opt/lampp/etc/extra/httpd-vhosts.conf
+        <VirtualHost cs4430.local:80>
+                DocumentRoot    "/opt/lampp/htdocs/cs4430/"
+                ErrorLog        "/opt/lampp/htdocs/cs4430/error_log"
+                ServerName      cs4430.local
+                <Directory />
+                        AllowOverride all
+                </Directory>
+        </VirtualHost>
+    will have problems if mysql-server is installed so stop it so lampps version of sql works
+        sudo service mysql stop
 Caleb Notes:
     Using LAMPP
     Server name is cs4430.local

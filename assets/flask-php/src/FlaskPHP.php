@@ -5,7 +5,9 @@ use ReflectionFunction;
 
 class FlaskPHP
 {
-    private $routes = [];
+    // CALEB UPDATED
+    // WAS private $routes = [];
+    protected $routes = [];
 
     public function __construct() {
     }

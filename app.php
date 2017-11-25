@@ -1,8 +1,6 @@
 <?php
 namespace cs4430;
 
-die("HERE");
-
 use FlaskPHP\FlaskPHP;
 use FlaskPHP\Template\PhpTemplate;
 use FlaskPHP\Template\TwigTemplate;
@@ -19,6 +17,11 @@ class App {
      * Application dispatcher
     **/
     public function __construct() {
+        // TODO remove debugging info
+        error_reporting(E_ERROR|E_WARNING|E_PARSE);
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+        // END TODO
         $this->setupDependencies();
         self::$flask->run();
     }
@@ -27,24 +30,11 @@ class App {
         require 'debug.php';
         require 'files.php';
         Files::includeFilesRecursively("includes");
-        $this->setupTemplateEngine();
         $this->setupRoutesHandler();
     }
 
-    private function setupTemplateEngine() {
-        require 'assets/smarty/Smarty.class.php';
-        self::$smarty = new \Smarty();
-        // set template dirs
-        self::$smarty->setTemplateDir('./public/templates');
-        self::$smarty->setCompileDir('./public/templates_c');
-        // self::$smarty->setCacheDir('./public/cache');
-        // self::$smarty->setConfigDir('/smarty/configs');
-    }
-
     private function setupRoutesHandler() {
-        // require 'assets/flask-php/src/FlaskPHP.php';
-        require 'assets/flask-php/vendor/autoload.php';
-        self::$flask = new \FlaskPHP\FlaskPHP();
+        self::$flask = new MyFlaskPHP();
         Files::includeFilesRecursively("routes");
     }
 
@@ -63,15 +53,43 @@ class App {
      * @ref https://twig.symfony.com/doc/2.x/templates.html
     **/
     public static function display(string $template, array $args = []) {
-        // foreach($args as $k => $v) {
-        //     self::$smarty->assign($k, $v);
-        // }
-        // self::$smarty->display($template);
         $template = "public/templates/$template";
-        echo $template;
-        return TwigTemplate::render($template, $args);
+        // must use callback so that the template uses the dir of this file
+        $callback = function($template, $args) {
+            echo PhpTemplate::render($template, $args)->getContent();
+        };
+        return $callback($template, $args);
+        // formatted_var_dump($template, $args);
+        // return PhpTemplate::render($template, $args);
+    }
+
+    public static function getDir() {
+        return __DIR__ . '/';
+    }
+
+    public static function getAllRoutes() {
+        return self::$flask->getRoutes();
+    }
+
+    public static function redirect($relUrl) {
+        $link = sprintf("%s://%s/%s",
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+            $_SERVER['SERVER_NAME'],
+            $relUrl
+        );
+        header("Location: $link");
+        die;
     }
 }
+
+register_shutdown_function(function(){
+    $e = error_get_last();
+    if( ! is_null($e) ) {
+        echo "<PRE>";
+        var_dump(debug_backtrace());
+        var_dump($e['message']);
+    }
+});
 
 try { // TODO Remove try catch - just debugging to format
     new App();

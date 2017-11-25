@@ -1,5 +1,5 @@
 <?php
-namespace My;
+namespace cs4430;
 /**
  * PDO Db Connection wrapper
  */
@@ -29,7 +29,7 @@ class DbConn {
         try {
             self::$conn = new \PDO($connInfo, self::USER, self::PASS);
             self::$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
+        } catch(\PDOException $e) {
             print "PDO Connection Error: " . $e->getMessage() . "\n";
             var_dump([
                 'HOST'  => self::HOST,
@@ -84,7 +84,7 @@ class DbConn {
                         break;
                     case "select":
                         if( $rowCount > 0 ) {
-                            $response = $statement->fetchAll(PDO::FETCH_ASSOC);
+                            $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
                         }
                         break;
                 }
@@ -95,7 +95,7 @@ class DbConn {
             }
             $errorCode  = self::$conn->errorCode();
             $errored    = intval($errorCode) !== 0;
-        } catch(PDOException $e) {
+        } catch(\PDOException $e) {
             // \Exception occured
             $errorCode  = self::$conn->errorCode();
             $errored    = true;

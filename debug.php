@@ -1,7 +1,5 @@
 <?php
 
-namespace cs4430;
-
 /**
  * Pass as many arguments as needed
  * var_dump all args with surrounding pre tags
