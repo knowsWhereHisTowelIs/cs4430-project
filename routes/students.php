@@ -14,11 +14,12 @@ class Students {
 
     public static function list() {
         $list = [];
-        $query = "SELECT * FROM `students`";
+        $query = "SELECT * FROM `Students`";
         $select = DbConn::getResults($query, []);
         if( ! $select['errored'] ) {
             $list = $select['response'];
         }
+        formatted_var_dump($select);
         App::display("students/list.php", [
             'list' => $list,
         ]);
@@ -27,13 +28,15 @@ class Students {
     public static function insert() {
         $showForm = true;
         if( isset($_REQUEST['submitted']) ) {
-            $sid = $_REQUEST['sid'];
-            $insert = DbConn::insert("students", [
-                'sid' => $sid,
+            $insert = DbConn::insert("Students", [
+                'sname' => $_REQUEST['sname'],
+                'status' => $_REQUEST['status'],
             ]);
             if( ! $insert['errored'] ) {
                 $showForm = false;
                 App::redirect("students/list");
+            } else {
+                formatted_var_dump("TODO error reporting", $insert);
             }
         }
         if( $showForm ) {

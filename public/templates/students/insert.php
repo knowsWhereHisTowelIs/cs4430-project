@@ -2,10 +2,19 @@
 
 <h1>Students List</h1>
 <form method='post'>
-    <label>
-        SID
-        <input name='sid' value='' />
-    </label>
+    <div>
+        <label>
+            SNAME
+            <input name='sname' value='' />
+        </label>
+    </div>
+
+    <div>
+        <label>
+            STATUS
+            <input name='status' value='' />
+        </label>
+    </div>
     <input name='submitted' type='submit' />
 </form>
 
