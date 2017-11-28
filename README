@@ -17,6 +17,7 @@ Lampp Setup:
                         AllowOverride all
                 </Directory>
         </VirtualHost>
+    Include etc/extra/httpd-vhosts.conf
     will have problems if mysql-server is installed so stop it so lampps version of sql works
         sudo service mysql stop
 Caleb Notes:
