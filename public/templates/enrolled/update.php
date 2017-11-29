@@ -11,14 +11,14 @@
             <input name='sid' value='<?php echo $sid;?>' />
         </label>
     </div>
-    
+
     <div>
         <label>
             CID
             <input name='aid' value='<?php echo $cid;?>' />
         </label>
     </div>
-    
+
     <input name='submitted' type='submit' />
 </form>
 

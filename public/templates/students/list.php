@@ -8,9 +8,9 @@
     <li>
         <a href="/students/insert">Insert</a>
     </li>
-    <li>
+    <!--<li>
         <a href="/students/update">Update</a>
-    </li>
+    </li>-->
     <li>
         <a href="/students/delete">Delete</a>
     </li>
@@ -28,13 +28,22 @@ if( empty($list) ) {
     foreach($keys as $k) {
         echo "<th>$k</th>";
     }
+    echo "<th>Actions</th>";
     echo "</tr>";
-    echo "<table>";
+    echo "<tbody>";
     foreach($list as $row) {
         echo "<tr>";
         foreach($row as $v) {
             echo "<td>$v</td>";
         }
+        ?>
+        <td>
+            <form method='post' action='/students/update'>
+                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+                <button type='submit'>Update</button>
+            </form>
+        </td>
+        <?php
         echo "</tr>";
     }
     echo "</tbody>";

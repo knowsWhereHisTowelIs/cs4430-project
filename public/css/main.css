@@ -13,11 +13,35 @@ table tr:nth-child(odd) {
 
 table th {
     color: white;
-    background-color: black;
+    background-color: #c48b04;
     text-transform: capitalize;
 }
 
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+#content label {
+    font-weight: bold;
+    width: 24%;
+    display: inline-block;
+}
+
+#content input {
+    /** float:right; **/
+    width:75%;
+}
+
+#content div {
+    margin-bottom: 10px;
+}
+
+#content td {
+    text-transform: capitalize;
+}
+
+#content form button {
+    font-size: 1em;
+    padding: 2px 10px;
 }

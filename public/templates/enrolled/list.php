@@ -29,7 +29,7 @@ if( empty($list) ) {
         echo "<th>$k</th>";
     }
     echo "</tr>";
-    echo "<table>";
+    echo "<tbody>";
     foreach($list as $row) {
         echo "<tr>";
         foreach($row as $v) {

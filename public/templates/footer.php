@@ -12,9 +12,9 @@
                     <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
                         <div>
                             <div>
-                                <strong>Western Michigan University</strong><br>
+                                <!--<strong>Western Michigan University</strong><br>
                                 Kalamazoo MI 49008-5200 USA<br>
-                                (269) 387-1000
+                                (269) 387-1000-->
                             </div>
                         </div>
                     </div>
@@ -42,11 +42,11 @@
     </div>
     <div class="small-6 medium-12 large-3 columns footer-fourth copyright">
         <section class="block block-wmu-cms block-wmu-cms-logistics">
-            <p><strong>Western Michigan University</strong><br>
+            <!--<p><strong>Western Michigan University</strong><br>
             <span>Kalamazoo MI 49008-5200 USA</span><br>
             <span>(269) 387-1000</span><br>
             <a href="http://wmich.edu/contact">Contact WMU</a></p>
-            <p>© 2017 All rights reserved.</p>
+            <p>© 2017 All rights reserved.</p>-->
         </section>
     </div>
 </div>
