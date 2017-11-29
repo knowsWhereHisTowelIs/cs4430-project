@@ -2,19 +2,19 @@
 
 <?php formatted_var_dump (get_defined_vars());?>
 
-<h1>Students List</h1>
+<h1>Teachers List</h1>
 <form method='post'>
     <div>
         <label>
             SNAME
-            <input name='sname' value='<?php echo $sname;?>' />
+            <input name='tname' value='<?php echo $tname;?>' />
         </label>
     </div>
 
     <div>
         <label>
             STATUS
-            <input name='status' value='<?php echo $status;?>' />
+            <input name='position' value='<?php echo $position;?>' />
         </label>
     </div>
     <input name='submitted' type='submit' />

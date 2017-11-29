@@ -202,9 +202,6 @@ class DbConn {
      * @throws \Exception - invalid arg count
      */
     public static function delete(string $table, array $args, string $where) {
-        if( empty($args) ) {
-            throw new \Exception("Must have nonempty args");
-        }
         $query = "DELETE FROM `$table` WHERE $where;";
         $result = self::getResults($query, $args, "delete");
         return $result;

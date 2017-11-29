@@ -33,8 +33,8 @@ CREATE TABLE WeightOfGrades(
 	cid INT NOT NULL,
 	aname VARCHAR(50) NOT NULL,
 	weight INT NOT NULL,
-    PRIMARY KEY(aid),
-    UNIQUE(cid, aname),
+	PRIMARY KEY(aid),
+	UNIQUE(cid, aname),
 	FOREIGN KEY (cid) REFERENCES Classes(cid)
 );
 
@@ -46,6 +46,5 @@ CREATE TABLE ClassesWork(
 	grade INT NOT NULL,
 	PRIMARY KEY(cid, aid, sid),
 	FOREIGN KEY (cid) REFERENCES Classes(cid),
-	FOREIGN KEY (aid) REFERENCES WeightOfGrades(aid),
 	FOREIGN KEY (sid) REFERENCES Students(sid)
 );
