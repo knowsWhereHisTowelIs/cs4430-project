@@ -10,6 +10,7 @@ class Classes {
         App::addRoute("classes/insert", [$this, 'insert']);
         App::addRoute("classes/update", [$this, 'update']);
         App::addRoute("classes/delete", [$this, 'delete']);
+        App::addRoute("classes/students_in_class", [$this, 'students_in_class']);
     }
 
     public static function list() {
@@ -54,7 +55,7 @@ class Classes {
     public static function delete() {
         $showForm = true;
         if( isset($_REQUEST['submitted']) ) {
-        $cid=7;
+        $cid=1;
             $delete = DbConn::delete("Classes", [], "cid=$cid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -66,8 +67,21 @@ class Classes {
         if( $showForm ) {
             App::display("classes/delete.php", []);
         }
+    }  
+   
+    public static function students_in_class() {
+        $showForm = true;
+        $sname = "none";
+        if( isset($_REQUEST['submitted']) ) {
+	    $cid = $_REQUEST['cid'];
+            $students_in_class = DbConn::getResults("SELECT DISTINCT sname FROM Students, Enrolled, Classes
+            WHERE Enrolled.sid=Students.sid AND Enrolled.cid=$cid", []);
+            if( ! $students_in_class['errored'] ) {
+	      $sname = $students_in_class['response'][0]['sname'];
+            }
+        }
+            App::display("classes/students_in_class.php", ['sname' => $sname]);
     }
-    
 }
 new Classes();
  

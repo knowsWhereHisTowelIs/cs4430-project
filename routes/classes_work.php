@@ -10,8 +10,24 @@ class ClassesWork {
         App::addRoute("classes_work/insert", [$this, 'insert']);
         App::addRoute("classes_work/update", [$this, 'update']);
         App::addRoute("classes_work/delete", [$this, 'delete']);
+        App::addRoute("classes_work/assignment_grade", [$this, 'assignment_grade']);
     }
 
+    public static function assignment_grade() {
+        $showForm = true;
+        $grade = "n/a";
+        if( isset($_REQUEST['submitted']) ) {
+	    $cid = $_REQUEST['cid'];
+            $aid = $_REQUEST['aid'];
+            $sid = $_REQUEST['sid'];
+            $assignment_grade = DbConn::getResults("SELECT grade FROM ClassesWork WHERE cid=$cid AND aid=$aid AND sid=$sid ", []);
+            if( ! $assignment_grade['errored'] ) {
+                $grade = $assignment_grade['response'][0]['grade'];
+            }
+        }
+            App::display("classes_work/assignment_grade.php", ['grade' => $grade]); 
+    }
+    
     public static function list() {
         $list = [];
         $query = "SELECT * FROM `ClassesWork`";

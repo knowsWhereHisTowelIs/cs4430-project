@@ -11,8 +11,24 @@ class Students {
         App::addRoute("students/update", [$this, 'update']);
         App::addRoute("students/update<?>", [$this, 'update']);
         App::addRoute("students/delete", [$this, 'delete']);
+        App::addRoute("students/classes_enrolled", [$this, 'classes_enrolled']);
+        
     }
-
+    
+        public static function classes_enrolled() {
+        $showForm = true;
+        $cname = "This student isn't enrolled for any classes";
+        if( isset($_REQUEST['submitted']) ) {
+	    $sid = $_REQUEST['sid'];
+            $classes_enrolled = DbConn::getResults("SELECT DISTINCT cname FROM Students, Enrolled, Classes
+            WHERE Enrolled.cid=Classes.cid AND Enrolled.sid=$sid", []);
+            if( ! $classes_enrolled['errored'] ) {
+	      $cname = $classes_enrolled['response'][0]['cname'];
+            }
+        }
+            App::display("classes/classes_enrolled.php", ['cname' => $cname]);
+    }
+    
     public static function list() {
         $list = [];
         $query = "SELECT * FROM `Students`";
@@ -30,7 +46,7 @@ class Students {
         $showForm = true;
         if( isset($_REQUEST['submitted']) ) {
             $insert = DbConn::insert("Students", [
-                'sname' => $_REQUEST['sname'],
+                'cname' => $_REQUEST['cname'],
                 'status' => $_REQUEST['status'],
             ]);
             if( ! $insert['errored'] ) {
@@ -49,7 +65,7 @@ class Students {
 	$showForm = true;
         if( isset($_REQUEST['submitted']) ) {
 	    $sid = 1;
-            $update = DbConn::update("Students", ['sname' => $_REQUEST['sname'], 'status' => $_REQUEST['status']], "sid='$sid'");
+            $update = DbConn::update("Students", ['cname' => $_REQUEST['cname'], 'status' => $_REQUEST['status']], "sid='$sid'");
             if( ! $update['errored'] ) {
                 $showForm = false;
                 App::redirect("students/update");
