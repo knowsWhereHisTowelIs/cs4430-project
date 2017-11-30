@@ -4,21 +4,17 @@
 
 <h1>Enrolled List</h1>
 <form method='post'>
-
     <div>
         <label>
-            SID
+            Student ID (sid)
             <input name='sid' value='<?php echo $sid;?>' />
         </label>
     </div>
-
     <div>
         <label>
-            CID
             <input name='aid' value='<?php echo $cid;?>' />
         </label>
     </div>
-
     <input name='submitted' type='submit' />
 </form>
 

@@ -19,7 +19,6 @@ class WeightOfGrades {
         if( ! $select['errored'] ) {
             $list = $select['response'];
         }
-        formatted_var_dump($select);
         App::display("weight_of_grades/list.php", [
             'list' => $list,
         ]);
@@ -47,16 +46,15 @@ class WeightOfGrades {
     }
 
     public static function update() {
-	$showForm = true;
-	
+	    $showForm = true;
         App::display("weight_of_grades/update.php", []);
     }
 
     public static function delete() {
         $showForm = true;
         if( isset($_REQUEST['submitted']) ) {
-        $aid=2;
-        $cid=6;
+            $aid=2;
+            $cid=6;
             $delete = DbConn::delete("WeightOfGrades", [], "aid=$aid AND cid=$cid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -71,5 +69,3 @@ class WeightOfGrades {
     }
 }
 new WeightOfGrades();
- 
- 
