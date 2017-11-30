@@ -11,8 +11,25 @@ class Students {
         App::addRoute("students/update", [$this, 'update']);
         App::addRoute("students/delete", [$this, 'delete']);
         App::addRoute("students/classes_enrolled", [$this, 'classes_enrolled']);
+        App::addRoute("students/assignment_grade", [$this, 'assignment_grade']);
     }
-
+    
+    public static function assignment_grade() {
+        $showForm = true;
+        $cname = "This assignment doesn't exist or that student doesn't do that assignment";
+        if( isset($_REQUEST['submitted']) ) {
+            $sid = $_REQUEST['sid'];
+            $aid = $_REQUEST['aid'];
+            $cid = $_REQUEST['cid'];
+            $assignment_grade = DbConn::getResults("SELECT grade FROM ClassesWork
+                WHERE cid=$cid AND sid=$sid AND aid=$aid", []);
+            if( ! $assignment_grade['errored'] ) {
+                $grade = $assignment_grade['response'][0]['grade'];
+            }
+        }
+        App::display("students/assignment_grade.php", ['grade' => $grade]);
+    }
+    
     public static function classes_enrolled() {
         $showForm = true;
         $cname = "This student isn't enrolled for any classes";
@@ -24,7 +41,7 @@ class Students {
                 $cname = $classes_enrolled['response'][0]['cname'];
             }
         }
-        App::display("classes/classes_enrolled.php", ['cname' => $cname]);
+        App::display("students/classes_enrolled.php", ['cname' => $cname]);
     }
 
     public static function list() {
@@ -88,8 +105,8 @@ class Students {
 
     public static function delete() {
         $showForm = true;
+        $sid = $_REQUEST['sid'];
         if( isset($_REQUEST['submitted']) ) {
-        $sid=3;
             $delete = DbConn::delete("Students", [], "sid=$sid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -99,7 +116,7 @@ class Students {
             }
         }
         if( $showForm ) {
-            App::display("students/delete.php", []);
+            App::display("students/delete.php", ['sid' => $sid]);
         }
     }
 }
