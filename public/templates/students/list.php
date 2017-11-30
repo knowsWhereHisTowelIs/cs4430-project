@@ -29,10 +29,18 @@ if( empty($list) ) {
         }
         ?>
         <td>
-        <form method='post' action='/students/update'>
-            <input type='hidden' name='sid' value="<?=$row['sid']?>" />
-            <button type='submit'>Update</button>
-        </form>
+            <form method='post' action='/students/classes_enrolled'>
+                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+                <button type='submit'>Classes Enrolled</button>
+            </form>
+            <form method='post' action='/students/assignment_grade'>
+                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+                <button type='submit'>Assignment Grade</button>
+            </form>
+            <form method='post' action='/students/update'>
+                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+                <button type='submit'>Update</button>
+            </form>
             <form method='post' action='/students/delete'>
                 <input type='hidden' name='sid' value="<?=$row['sid']?>" />
                 <button type='submit'>delete</button>

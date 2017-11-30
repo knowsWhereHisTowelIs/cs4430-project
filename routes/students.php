@@ -13,35 +13,41 @@ class Students {
         App::addRoute("students/classes_enrolled", [$this, 'classes_enrolled']);
         App::addRoute("students/assignment_grade", [$this, 'assignment_grade']);
     }
-    
+
     public static function assignment_grade() {
-        $showForm = true;
-        $cname = "This assignment doesn't exist or that student doesn't do that assignment";
-        if( isset($_REQUEST['submitted']) ) {
-            $sid = $_REQUEST['sid'];
-            $aid = $_REQUEST['aid'];
-            $cid = $_REQUEST['cid'];
-            $assignment_grade = DbConn::getResults("SELECT grade FROM ClassesWork
-                WHERE cid=$cid AND sid=$sid AND aid=$aid", []);
-            if( ! $assignment_grade['errored'] ) {
-                $grade = $assignment_grade['response'][0]['grade'];
-            }
+        $sid = $_REQUEST['sid'];
+        $query = "SELECT sid, sname, aid, aname, cid, cname, grade FROM Students
+            NATURAL JOIN ClassesWork
+            NATURAL JOIN Enrolled
+            NATURAL JOIN Classes
+            NATURAL JOIN WeightOfGrades
+            WHERE sid = $sid";
+        $results = DbConn::getResults($query, []);
+        if( ! $results['errored'] ) {
+            $list = $results['response'];
+        } else {
+            $list = [];
         }
-        App::display("students/assignment_grade.php", ['grade' => $grade]);
+        App::display("students/assignment_grade.php", [
+            'list' => $list
+        ]);
     }
-    
+
     public static function classes_enrolled() {
-        $showForm = true;
-        $cname = "This student isn't enrolled for any classes";
-        if( isset($_REQUEST['submitted']) ) {
-            $sid = $_REQUEST['sid'];
-            $classes_enrolled = DbConn::getResults("SELECT DISTINCT cname FROM Students, Enrolled, Classes
-                WHERE Enrolled.cid=Classes.cid AND Enrolled.sid=$sid", []);
-            if( ! $classes_enrolled['errored'] ) {
-                $cname = $classes_enrolled['response'][0]['cname'];
-            }
+        $sid = $_REQUEST['sid'];
+        $query = "SELECT sid, sname, cid, cname FROM Students
+            NATURAL JOIN Enrolled
+            NATURAL JOIN Classes
+            WHERE sid = $sid";
+        $results = DbConn::getResults($query, []);
+        if( ! $results['errored'] ) {
+            $list = $results['response'];
+        } else {
+            $list = [];
         }
-        App::display("students/classes_enrolled.php", ['cname' => $cname]);
+        App::display("students/classes_enrolled.php", [
+            'list' => $list
+        ]);
     }
 
     public static function list() {
