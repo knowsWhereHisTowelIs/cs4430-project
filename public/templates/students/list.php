@@ -3,16 +3,7 @@
 <h1>Students List</h1>
 <ul>
     <li>
-        <a href="/students/list">list</a>
-    </li>
-    <li>
         <a href="/students/insert">Insert</a>
-    </li>
-    <!--<li>
-        <a href="/students/update">Update</a>
-    </li>-->
-    <li>
-        <a href="/students/delete">Delete</a>
     </li>
 </ul>
 <?php
@@ -38,13 +29,13 @@ if( empty($list) ) {
         }
         ?>
         <td>
+        <form method='post' action='/students/update'>
+            <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+            <button type='submit'>Update</button>
+        </form>
             <form method='post' action='/students/delete'>
                 <input type='hidden' name='sid' value="<?=$row['sid']?>" />
                 <button type='submit'>delete</button>
-            </form>
-            <form method='post' action='/students/update'>
-                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
-                <button type='submit'>Update</button>
             </form>
         </td>
         <?php

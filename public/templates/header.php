@@ -75,54 +75,8 @@
                <ul class="title-area">
                   <li class="name">
                      <h2 id="site-name-topbar"><a href="https://wmich.edu/" rel="home" title="Back to Western Michigan University home page"><img class="logo" src="/public/Academics _ Western Michigan University_files/w.svg" alt="W logo"><img class="site-name" src="/public/Academics _ Western Michigan University_files/name.svg" alt="Western Michigan University"></a></h2>
-                  </li>
-                  <li class="toggle-topbar menu-icon">
-                     <a href="https://wmich.edu/academics#"><span></span></a>
-                  </li>
+                 </li>
                </ul>
-               <section class="top-bar-section">
-                  <!--.l-header-region -->
-                  <div class="l-header-region">
-                     <div class="block block-wmu-google-search block-wmu-google-search-mobile">
-                        <form action="https://search.wmich.edu/search" method="get" id="wmu-google-search-form--2" accept-charset="UTF-8" class="hideSubmitButton-processed">
-                           <div>
-                              <h2 class="element-invisible">Search form</h2>
-                              <div class="row collapse">
-                                 <div class="large-12 columns">
-                                    <div class="row collapse">
-                                       <div class="small-10 medium-11 large-10 columns">
-                                          <input title="Search WMU" type="search" id="edit-q--2" name="q" value="" size="15" maxlength="128" placeholder="Search WMU" class="form-text form-search">
-                                       </div>
-                                       <div class="small-2 medium-1 large-2 columns">
-                                          <button type="submit" class="button postfix" title="Search" aria-label="submit form">
-                                          <i class="fa fa-search"></i><span class="element-invisible">Search</span>
-                                          </button>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-                  <!--/.l-header-region -->
-                  <ul id="main-menu" class="main-nav left">
-                     <li class="first leaf" title=""><a href="https://wmich.edu/academics" title="" class="active">Academics</a></li>
-                     <li class="leaf" title=""><a href="https://wmich.edu/admissions" title="">Admissions</a></li>
-                     <li class="leaf" title=""><a href="https://wmich.edu/finaid" title="">Financial Aid</a></li>
-                     <li class="leaf" title=""><a href="https://wmich.edu/students" title="">Student Life</a></li>
-                     <li class="leaf" title=""><a href="http://wmubroncos.com/" title="">Athletics</a></li>
-                     <li class="last leaf" title=""><a href="https://wmich.edu/research" title="">Research</a></li>
-                  </ul>
-                  <ul id="secondary-menu" class="secondary link-list right">
-                     <li class="first leaf" title=""><a href="https://wmich.edu/about" title="">About</a></li>
-                     <li class="leaf"><a href="http://wmich.edu/directories">A–Z</a></li>
-                     <li class="leaf" title=""><a href="https://wmich.edu/contact" title="">Contact</a></li>
-                     <li class="leaf" title=""><a href="http://www.wmich.edu/peoplesearch/" title="">Find People</a></li>
-                     <li class="leaf" title=""><a href="http://gowmu.wmich.edu/" title="">GoWMU</a></li>
-                     <li class="last leaf" title=""><a href="https://wmich.edu/visit" title="">Visit</a></li>
-                  </ul>
-               </section>
             </nav>
          </div>
          <!--/.top-bar -->
@@ -136,7 +90,10 @@
 					</a>
 				</div>
                 <h2 id="section-name" class="columns" style="display:inline-block;width:auto;">
-				   <a href="/">CS4430 Final Project</a>
+				   <a href="/">
+                       CS4430 Final Project
+                       <br /><small>University Database</small>
+                   </a>
 			   	</h2>
             </div>
          </section>
