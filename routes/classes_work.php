@@ -25,9 +25,9 @@ class ClassesWork {
                 $grade = $assignment_grade['response'][0]['grade'];
             }
         }
-            App::display("classes_work/assignment_grade.php", ['grade' => $grade]); 
+            App::display("classes_work/assignment_grade.php", ['grade' => $grade]);
     }
-    
+
     public static function list() {
         $list = [];
         $query = "SELECT * FROM `ClassesWork`";
@@ -35,7 +35,6 @@ class ClassesWork {
         if( ! $select['errored'] ) {
             $list = $select['response'];
         }
-        formatted_var_dump($select);
         App::display("classes_work/list.php", [
             'list' => $list,
         ]);
@@ -63,8 +62,8 @@ class ClassesWork {
     }
 
     public static function update() {
-	$showForm = true;
-	
+        // TODO
+        $showForm = true;
         App::display("classes_work/update.php", []);
     }
 
@@ -86,8 +85,6 @@ class ClassesWork {
             App::display("classes_work/delete.php", []);
         }
     }
-    
+
 }
 new ClassesWork();
- 
- 

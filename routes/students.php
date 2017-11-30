@@ -21,7 +21,8 @@ class Students {
             NATURAL JOIN Enrolled
             NATURAL JOIN Classes
             NATURAL JOIN WeightOfGrades
-            WHERE sid = $sid";
+            WHERE sid = $sid
+            ORDER BY cid";
         $results = DbConn::getResults($query, []);
         if( ! $results['errored'] ) {
             $list = $results['response'];
@@ -38,7 +39,8 @@ class Students {
         $query = "SELECT sid, sname, cid, cname FROM Students
             NATURAL JOIN Enrolled
             NATURAL JOIN Classes
-            WHERE sid = $sid";
+            WHERE sid = $sid
+            ORDER BY cid";
         $results = DbConn::getResults($query, []);
         if( ! $results['errored'] ) {
             $list = $results['response'];

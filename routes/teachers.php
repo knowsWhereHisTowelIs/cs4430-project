@@ -19,7 +19,6 @@ class Teachers {
         if( ! $select['errored'] ) {
             $list = $select['response'];
         }
-        formatted_var_dump($select);
         App::display("teachers/list.php", [
             'list' => $list,
         ]);
@@ -46,7 +45,7 @@ class Teachers {
 
     public static function update() {
 	$showForm = true;
-	
+
         App::display("teachers/update.php", []);
     }
 
@@ -68,4 +67,3 @@ class Teachers {
     }
 }
 new Teachers();
- 

@@ -13,7 +13,9 @@ class Enrolled {
 
     public static function list() {
         $list = [];
-        $query = "SELECT * FROM `Enrolled`";
+        $query = "SELECT sid, sname, cid, cname FROM `Enrolled`
+            NATURAL JOIN Students
+            NATURAL JOIN Classes ORDER BY sid";
         $select = DbConn::getResults($query, []);
         if( ! $select['errored'] ) {
             $list = $select['response'];
@@ -46,7 +48,7 @@ class Enrolled {
         $showForm = true;
         $sid = $_REQUEST['sid'];
         $cid = $_REQUEST['cid'];
-        if( isset($_REQUEST['submitted']) ) {  
+        if( isset($_REQUEST['submitted']) ) {
             $delete = DbConn::delete("Enrolled", [], "sid=$sid AND cid=$cid");
             if( ! $delete['errored'] ) {
                 $showForm = false;

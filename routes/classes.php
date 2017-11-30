@@ -20,7 +20,6 @@ class Classes {
         if( ! $select['errored'] ) {
             $list = $select['response'];
         }
-        formatted_var_dump($select);
         App::display("classes/list.php", [
             'list' => $list,
         ]);
@@ -47,8 +46,8 @@ class Classes {
     }
 
     public static function update() {
-	$showForm = true;
-	
+        // TODO
+	    $showForm = true;
         App::display("classes/update.php", []);
     }
 
@@ -67,8 +66,8 @@ class Classes {
         if( $showForm ) {
             App::display("classes/delete.php", []);
         }
-    }  
-   
+    }
+
     public static function students_in_class() {
         $showForm = true;
         $sname = "none";
@@ -84,4 +83,3 @@ class Classes {
     }
 }
 new Classes();
- 
