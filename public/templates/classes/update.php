@@ -21,6 +21,7 @@
             <input name='subject' value='<?php echo $subject;?>' />
         </label>
     </div>
+    <input type="hidden" name="cid" value="<?php echo $cid; ?>" />
     <input name='submitted' type='submit' />
 </form>
 

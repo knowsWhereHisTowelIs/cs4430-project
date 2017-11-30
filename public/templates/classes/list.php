@@ -8,12 +8,6 @@
     <li>
         <a href="/classes/insert">Insert</a>
     </li>
-    <li>
-        <a href="/classes/update">Update</a>
-    </li>
-    <li>
-        <a href="/classes/delete">Delete</a>
-    </li>
 </ul>
 <?php
 if( empty($list) ) {
@@ -28,6 +22,7 @@ if( empty($list) ) {
     foreach($keys as $k) {
         echo "<th>$k</th>";
     }
+    echo "<th>Actions</th>";
     echo "</tr>";
     echo "<tbody>";
     foreach($list as $row) {
@@ -35,6 +30,24 @@ if( empty($list) ) {
         foreach($row as $v) {
             echo "<td>$v</td>";
         }
+        ?>
+        <td>
+
+            <form method='post' action='/classes/students_in_class'>
+                <input type='hidden' name='cid' value="<?=$row['cid']?>" />
+                <button type='submit'>Student List</button>
+            </form>
+            <form method='post' action='/classes/update'>
+                <input type='hidden' name='cid' value="<?=$row['cid']?>" />
+                <button type='submit'>Update</button>
+            </form>
+            <form method='post' action='/classes/delete'>
+                <input type='hidden' name='cid' value="<?=$row['cid']?>" />
+                <button type='submit'>delete</button>
+            </form>
+
+        </td>
+        <?php
         echo "</tr>";
     }
     echo "</tbody>";

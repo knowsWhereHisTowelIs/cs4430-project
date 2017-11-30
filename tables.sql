@@ -24,6 +24,7 @@ CREATE TABLE Classes(
 CREATE TABLE Enrolled(
 	sid INT NOT NULL,
 	cid INT NOT NULL,
+	UNIQUE (`sid`, `cid`),
 	FOREIGN KEY (sid) REFERENCES Students(sid),
 	FOREIGN KEY (cid) REFERENCES Classes(cid)
 );

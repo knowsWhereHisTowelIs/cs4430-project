@@ -15,7 +15,7 @@ class Classes {
 
     public static function list() {
         $list = [];
-        $query = "SELECT * FROM `Classes`";
+        $query = "SELECT cid, cname, tid, tname, subject FROM `Classes` NATURAL JOIN Teachers ORDER BY tid";
         $select = DbConn::getResults($query, []);
         if( ! $select['errored'] ) {
             $list = $select['response'];
@@ -46,15 +46,38 @@ class Classes {
     }
 
     public static function update() {
-        // TODO
-	    $showForm = true;
-        App::display("classes/update.php", []);
+        $showForm = true;
+        $cid = $_REQUEST['cid'];
+        if( isset($_REQUEST['submitted']) ) {
+            $update = DbConn::update("Classes", [
+                'tid' => $_REQUEST['tid'],
+                'cname' => $_REQUEST['cname'],
+                'subject' => $_REQUEST['subject'],
+            ], "cid='$cid'" );
+            if( ! $update['errored'] ) {
+                $showForm = false;
+                App::redirect("classes/list");
+            } else {
+                formatted_var_dump("TODO error reporting", $update);
+            }
+        }
+        if( $showForm ) {
+            $data = [];
+            if( $cid != null ) {
+                $query = "SELECT * FROM Classes WHERE cid = $cid";
+                $results = DbConn::getResults($query, []);
+                if( ! $results['errored'] ) {
+                    $data = $results['response'][0];
+                }
+            }
+            App::display("classes/update.php", $data);
+        }
     }
 
     public static function delete() {
         $showForm = true;
+        $cid = $_REQUEST['cid'];
         if( isset($_REQUEST['submitted']) ) {
-        $cid=1;
             $delete = DbConn::delete("Classes", [], "cid=$cid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -64,22 +87,26 @@ class Classes {
             }
         }
         if( $showForm ) {
-            App::display("classes/delete.php", []);
+            App::display("classes/delete.php", [
+                'cid' => $cid,
+            ]);
         }
     }
 
     public static function students_in_class() {
         $showForm = true;
-        $sname = "none";
-        if( isset($_REQUEST['submitted']) ) {
-	    $cid = $_REQUEST['cid'];
-            $students_in_class = DbConn::getResults("SELECT DISTINCT sname FROM Students, Enrolled, Classes
-            WHERE Enrolled.sid=Students.sid AND Enrolled.cid=$cid", []);
-            if( ! $students_in_class['errored'] ) {
-	      $sname = $students_in_class['response'][0]['sname'];
-            }
+        $cid = $_REQUEST['cid'];
+        $query = "SELECT cid, cname, sid, sname FROM Classes NATURAL JOIN Enrolled NATURAL JOIN Students WHERE cid = $cid";
+        $results = DbConn::getResults($query, []);
+        if( ! $results['errored'] ) {
+            $list = $results['response'];
+        } else {
+            $list = [];
         }
-            App::display("classes/students_in_class.php", ['sname' => $sname]);
+        //TODO unique enrolled (cid, sid)
+        App::display("classes/students_in_class.php", [
+            'list' => $list
+        ]);
     }
 }
 new Classes();
