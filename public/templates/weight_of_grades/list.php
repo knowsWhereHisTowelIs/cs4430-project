@@ -1,24 +1,15 @@
 <?php require __DIR__ . '/../header.php'; ?>
 
-<h1>WeightOfGrades List</h1>
+<h1>ClassesWork List</h1>
 <ul>
     <li>
-        <a href="/weight_of_grades/list">list</a>
-    </li>
-    <li>
         <a href="/weight_of_grades/insert">Insert</a>
-    </li>
-    <li>
-        <a href="/weight_of_grades/update">Update</a>
-    </li>
-    <li>
-        <a href="/weight_of_grades/delete">Delete</a>
     </li>
 </ul>
 <?php
 if( empty($list) ) {
     ?>
-    <p>No weight_of_grades found</p>
+    <p>No Weight of Grades Found</p>
     <?php
 } else {
     $keys = array_keys($list[0]);
@@ -28,6 +19,7 @@ if( empty($list) ) {
     foreach($keys as $k) {
         echo "<th>$k</th>";
     }
+    echo "<th>Actions</th>";
     echo "</tr>";
     echo "<tbody>";
     foreach($list as $row) {
@@ -35,6 +27,18 @@ if( empty($list) ) {
         foreach($row as $v) {
             echo "<td>$v</td>";
         }
+        ?>
+        <td>
+            <form method='post' action='/weight_of_grades/update'>
+                <input type='hidden' name='aid' value="<?=$row['aid']?>" />
+                <button type='submit'>Update</button>
+            </form>
+            <form method='post' action='/weight_of_grades/delete'>
+                <input type='hidden' name='aid' value="<?=$row['aid']?>" />
+                <button type='submit'>Delete</button>
+            </form>
+        </td>
+        <?php
         echo "</tr>";
     }
     echo "</tbody>";

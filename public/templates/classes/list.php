@@ -3,9 +3,6 @@
 <h1>Classes List</h1>
 <ul>
     <li>
-        <a href="/classes/list">list</a>
-    </li>
-    <li>
         <a href="/classes/insert">Insert</a>
     </li>
 </ul>

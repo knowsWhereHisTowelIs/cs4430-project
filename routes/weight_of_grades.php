@@ -46,16 +46,44 @@ class WeightOfGrades {
     }
 
     public static function update() {
-	    $showForm = true;
-        App::display("weight_of_grades/update.php", []);
+	$showForm = true;
+        $aid = $_REQUEST['aid'];
+        if( isset($_REQUEST['submitted']) ) {
+            $update = DbConn::update("WeightOfGrades", [
+		'cid' => $_REQUEST['cid'],
+                'aname' => $_REQUEST['aname'],
+                'weight' => $_REQUEST['weight'],
+            ], "aid='$aid'");
+            if( ! $update['errored'] ) {
+                $showForm = false;
+                App::redirect("weight_of_grades/list");
+            } else {
+                formatted_var_dump("TODO error reporting", $update);
+            }
+        }
+        if( $showForm ) {
+            $data = [];
+                $query = "SELECT cid, aname, weight FROM WeightOfGrades WHERE aid = $aid";
+                $results = DbConn::getResults($query, []);
+                if( ! $results['errored'] ) {
+		    $cid = $results['response'][0]['cid'];
+                    $aname = $results['response'][0]['aname'];
+                    $weight = $results['response'][0]['weight'];
+                }
+            App::display("weight_of_grades/update.php", [
+            'aid' => $aid,
+            'cid' => $cid,
+            'aname' => $aname,
+            'weight' => $weight
+            ]);
+        }
     }
 
     public static function delete() {
         $showForm = true;
+        $aid = $_REQUEST['aid'];
         if( isset($_REQUEST['submitted']) ) {
-            $aid=2;
-            $cid=6;
-            $delete = DbConn::delete("WeightOfGrades", [], "aid=$aid AND cid=$cid");
+            $delete = DbConn::delete("WeightOfGrades", [], "aid=$aid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
                 App::redirect("weight_of_grades/list");
@@ -64,7 +92,9 @@ class WeightOfGrades {
             }
         }
         if( $showForm ) {
-            App::display("weight_of_grades/delete.php", []);
+            App::display("weight_of_grades/delete.php", [
+            'aid' => $aid
+            ]);
         }
     }
 }

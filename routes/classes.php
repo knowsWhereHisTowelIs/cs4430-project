@@ -96,7 +96,7 @@ class Classes {
     public static function students_in_class() {
         $showForm = true;
         $cid = $_REQUEST['cid'];
-        $query = "SELECT cid, cname, sid, sname FROM Classes NATURAL JOIN Enrolled NATURAL JOIN Students WHERE cid = $cid";
+        $query = "SELECT sid, sname FROM Classes NATURAL JOIN Enrolled NATURAL JOIN Students WHERE cid = $cid ORDER BY sid";
         $results = DbConn::getResults($query, []);
         if( ! $results['errored'] ) {
             $list = $results['response'];

@@ -43,16 +43,38 @@ class Teachers {
         }
     }
 
-    public static function update() {
-	$showForm = true;
-
-        App::display("teachers/update.php", []);
+    public static function update()  {
+        $showForm = true;
+        $tid = $_REQUEST['tid'];
+        if( isset($_REQUEST['submitted']) ) {
+            $update = DbConn::update("Teachers", [
+                'tname' => $_REQUEST['tname'],
+                'position' => $_REQUEST['position']
+            ], "tid='$tid'" );
+            if( ! $update['errored'] ) {
+                $showForm = false;
+                App::redirect("teachers/list");
+            } else {
+                formatted_var_dump("TODO error reporting", $update);
+            }
+        }
+        if( $showForm ) {
+            $data = [];
+            if( $tid != null ) {
+                $query = "SELECT * FROM Teachers WHERE tid = $tid";
+                $results = DbConn::getResults($query, []);
+                if( ! $results['errored'] ) {
+                    $data = $results['response'][0];
+                }
+            }
+            App::display("teachers/update.php", $data);
+        }
     }
 
     public static function delete() {
         $showForm = true;
+        $tid = $_REQUEST['tid'];
         if( isset($_REQUEST['submitted']) ) {
-        $tid=4;
             $delete = DbConn::delete("Teachers", [], "tid=$tid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -62,7 +84,7 @@ class Teachers {
             }
         }
         if( $showForm ) {
-            App::display("teachers/delete.php", []);
+            App::display("teachers/delete.php", ['tid' => $tid]);
         }
     }
 }
