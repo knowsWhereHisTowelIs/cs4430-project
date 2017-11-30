@@ -30,7 +30,7 @@ class ClassesWork {
 
     public static function list() {
         $list = [];
-        $query = "SELECT * FROM `ClassesWork`";
+        $query = "SELECT cid, cname, aid, aname, sid, sname, grade FROM `ClassesWork` NATURAL JOIN Classes NATURAL JOIN Students NATURAL JOIN WeightOfGrades";
         $select = DbConn::getResults($query, []);
         if( ! $select['errored'] ) {
             $list = $select['response'];
@@ -62,17 +62,43 @@ class ClassesWork {
     }
 
     public static function update() {
-        // TODO
         $showForm = true;
-        App::display("classes_work/update.php", []);
+        $cid = $_REQUEST['cid'];
+        $aid = $_REQUEST['aid'];
+        $sid = $_REQUEST['sid'];
+        if( isset($_REQUEST['submitted']) ) {
+            $update = DbConn::update("ClassesWork", [
+                'grade' => $_REQUEST['grade']
+            ], "cid='$cid', aid='$aid', sid='$sid'" );
+            if( ! $update['errored'] ) {
+                $showForm = false;
+                App::redirect("classes_work/list");
+            } else {
+                formatted_var_dump("TODO error reporting", $update);
+            }
+        }
+        if( $showForm ) {
+            $data = [];
+                $query = "SELECT grade FROM ClassesWork WHERE cid = $cid AND aid = $aid AND sid = $sid";
+                $results = DbConn::getResults($query, []);
+                if( ! $results['errored'] ) {
+                    $grade = $results['response'][0]['grade'];
+                }
+            App::display("classes_work/update.php", [
+            'cid' => $cid,
+            'aid' => $aid,
+            'sid' => $sid,
+            'grade' => $grade
+            ]);
+        }
     }
 
     public static function delete() {
         $showForm = true;
+        $cid = $_REQUEST['cid'];
+        $aid = $_REQUEST['aid'];
+        $sid = $_REQUEST['sid'];
         if( isset($_REQUEST['submitted']) ) {
-        $cid=6;
-        $aid=1;
-        $sid=2;
             $delete = DbConn::delete("ClassesWork", [], "cid=$cid AND aid=$aid AND sid=$sid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -82,7 +108,11 @@ class ClassesWork {
             }
         }
         if( $showForm ) {
-            App::display("classes_work/delete.php", []);
+            App::display("classes_work/delete.php", [
+            'cid' => $cid,
+            'aid' => $aid,
+            'sid' => $sid,
+            ]);
         }
     }
 

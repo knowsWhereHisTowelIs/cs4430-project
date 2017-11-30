@@ -3,16 +3,7 @@
 <h1>ClassesWork List</h1>
 <ul>
     <li>
-        <a href="/classes_work/list">list</a>
-    </li>
-    <li>
         <a href="/classes_work/insert">Insert</a>
-    </li>
-    <li>
-        <a href="/classes_work/update">Update</a>
-    </li>
-    <li>
-        <a href="/classes_work/delete">Delete</a>
     </li>
 </ul>
 <?php
@@ -28,6 +19,7 @@ if( empty($list) ) {
     foreach($keys as $k) {
         echo "<th>$k</th>";
     }
+    echo "<th>Actions</th>";
     echo "</tr>";
     echo "<tbody>";
     foreach($list as $row) {
@@ -35,6 +27,22 @@ if( empty($list) ) {
         foreach($row as $v) {
             echo "<td>$v</td>";
         }
+        ?>
+        <td>
+            <form method='post' action='/classes_work/update'>
+                <input type='hidden' name='cid' value="<?=$row['cid']?>" />
+                <input type='hidden' name='aid' value="<?=$row['aid']?>" />
+                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+                <button type='submit'>Update</button>
+            </form>
+            <form method='post' action='/classes_work/delete'>
+                <input type='hidden' name='cid' value="<?=$row['cid']?>" />
+                <input type='hidden' name='aid' value="<?=$row['aid']?>" />
+                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+                <button type='submit'>Delete</button>
+            </form>
+        </td>
+        <?php
         echo "</tr>";
     }
     echo "</tbody>";
