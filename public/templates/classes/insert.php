@@ -1,24 +1,24 @@
 <?php require __DIR__ . '/../header.php'; ?>
 
-<h1>Classes List</h1>
+<h1>Class Insert</h1>
 
 <form method='post'>
     <div>
         <label>
-            TID
+            Teacher ID (tid)
             <input name='tid' value='' />
         </label>
     </div>
 
     <div>
         <label>
-            CNAME
+            Class Name (cname)
             <input name='cname' value='' />
         </label>
     </div>
     <div>
         <label>
-            SUBJECT
+            Subject
             <input name='subject' value='' />
         </label>
     </div>

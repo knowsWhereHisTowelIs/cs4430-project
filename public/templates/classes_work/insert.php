@@ -5,28 +5,28 @@
 <form method='post'>
     <div>
         <label>
-            CID
+            Classes ID (cid)
             <input name='cid' value='' />
         </label>
     </div>
-    
+
     <div>
         <label>
-            AID
+            Assignment ID (aid)
             <input name='aid' value='' />
         </label>
     </div>
-    
+
     <div>
         <label>
-            SID
+            Student ID (sid)
             <input name='sid' value='' />
         </label>
     </div>
-    
+
     <div>
         <label>
-            GRADE
+            Grade
             <input name='grade' value='' />
         </label>
     </div>

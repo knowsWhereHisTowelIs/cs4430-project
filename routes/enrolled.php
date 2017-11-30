@@ -29,7 +29,7 @@ class Enrolled {
         $showForm = true;
         if( isset($_REQUEST['submitted']) ) {
             $insert = DbConn::insert("Enrolled", [
-		'sid' => $_REQUEST['sid'],
+                'sid' => $_REQUEST['sid'],
                 'cid' => $_REQUEST['cid'],
             ]);
             if( ! $insert['errored'] ) {
@@ -46,7 +46,7 @@ class Enrolled {
 
     public static function update() {
 	$showForm = true;
-	
+
         App::display("enrolled/update.php", []);
     }
 
@@ -54,7 +54,7 @@ class Enrolled {
         $showForm = true;
         if( isset($_REQUEST['submitted']) ) {
         $sid=2;
-        $cid=6;  
+        $cid=6;
             $delete = DbConn::delete("Enrolled", [], "sid=$sid AND cid=$cid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -67,9 +67,6 @@ class Enrolled {
             App::display("enrolled/delete.php", []);
         }
     }
-    
+
 }
 new Enrolled();
- 
- 
-

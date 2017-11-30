@@ -5,7 +5,7 @@
 <form method='post'>
     <div>
         <label>
-            CID
+            Class ID (cid)
             <input name='cid' value='' />
         </label>
     </div>
@@ -14,4 +14,3 @@
 
 <?php echo $sname;?>
 <?php require __DIR__ . '/../footer.php'; ?>
-

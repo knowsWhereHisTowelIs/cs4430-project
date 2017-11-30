@@ -15,6 +15,7 @@ class Index {
             $pos = strpos($route, "<");
             $routes[] = ( $pos === false ) ? $route : substr($route, 0, $pos);
         }
+        asort($routes);
         App::display("index.php", [
             'routes' => $routes
         ]);

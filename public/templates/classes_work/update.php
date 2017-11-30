@@ -6,32 +6,32 @@
 <form method='post'>
     <div>
         <label>
-            CID
+            Classes ID
             <input name='cid' value='<?php echo $cid;?>' />
         </label>
     </div>
-    
+
     <div>
         <label>
-            ANAME
+            Assignment ID (aid)
             <input name='aid' value='<?php echo $aid;?>' />
         </label>
     </div>
-    
+
     <div>
         <label>
-            SID
+            Student ID (sid)
             <input name='sid' value='<?php echo $sid;?>' />
         </label>
     </div>
-    
+
     <div>
         <label>
-            GRADE
+            Grade
             <input name='grade' value='<?php echo $grade;?>' />
         </label>
     </div>
-    
+
     <input name='submitted' type='submit' />
 </form>
 

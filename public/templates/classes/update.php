@@ -1,25 +1,23 @@
 <?php require __DIR__ . '/../header.php'; ?>
 
-<?php formatted_var_dump (get_defined_vars());?>
-
-<h1>Classes List</h1>
+<h1>Update Class</h1>
 <form method='post'>
     <div>
         <label>
-            TID
+            Teacher ID (tid)
             <input name='tid' value='<?php echo $tid;?>' />
         </label>
     </div>
 
     <div>
         <label>
-            CNAME
+            Class Name (class)
             <input name='cname' value='<?php echo $cname;?>' />
         </label>
     </div>
     <div>
         <label>
-            SUBJECT
+            Subject
             <input name='subject' value='<?php echo $subject;?>' />
         </label>
     </div>

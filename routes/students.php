@@ -43,7 +43,7 @@ class Students {
         $showForm = true;
         if( isset($_REQUEST['submitted']) ) {
             $insert = DbConn::insert("Students", [
-                'cname' => $_REQUEST['cname'],
+                'sname' => $_REQUEST['sname'],
                 'status' => $_REQUEST['status'],
             ]);
             if( ! $insert['errored'] ) {
@@ -63,12 +63,12 @@ class Students {
         $sid = $_REQUEST['sid'];
         if( isset($_REQUEST['submitted']) ) {
             $update = DbConn::update("Students", [
-                'cname' => $_REQUEST['cname'],
+                'sname' => $_REQUEST['sname'],
                 'status' => $_REQUEST['status']
             ], "sid='$sid'" );
             if( ! $update['errored'] ) {
                 $showForm = false;
-                App::redirect("students/update");
+                App::redirect("students/list");
             } else {
                 formatted_var_dump("TODO error reporting", $update);
             }

@@ -1,8 +1,6 @@
 <?php require __DIR__ . '/../header.php'; ?>
 
-<?php formatted_var_dump (get_defined_vars());?>
-
-<h1>Classes List</h1>
+<h1>Delete Class</h1>
 <form method='post'>
     <p>Are you sure you want to delete?</p>
     <input name='submitted' type='submit' />

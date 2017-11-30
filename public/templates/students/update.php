@@ -13,6 +13,7 @@
         <label>STATUS</label>
         <input name='status' value='<?php echo $status;?>' />
     </div>
+    <input type="hidden" name="sid" value="<?php echo $sid; ?>" />
     <input name='submitted' type='submit' />
 </form>
 

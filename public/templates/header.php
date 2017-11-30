@@ -130,7 +130,7 @@
          <section class="l-section-name panel  show-for-large-up">
             <div class="row">
 				<div style="display:inline-block;float:left;">
-					<a href="https://wmich.edu/" rel="home" title="Back to Western Michigan University home page">
+					<a href="/" rel="home" title="Back to Western Michigan University home page">
 						<img class="logo" width="100" src="/public/Academics _ Western Michigan University_files/w.svg" alt="W logo">
 						<img class="site-name" width="100" src="/public/Academics _ Western Michigan University_files/name-stacked.svg" alt="Western Michigan University">
 					</a>
