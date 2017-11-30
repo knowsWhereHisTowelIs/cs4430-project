@@ -8,7 +8,6 @@ class Enrolled {
     public function __construct() {
         App::addRoute("enrolled/list",   [$this, 'list']);
         App::addRoute("enrolled/insert", [$this, 'insert']);
-        App::addRoute("enrolled/update", [$this, 'update']);
         App::addRoute("enrolled/delete", [$this, 'delete']);
     }
 
@@ -19,7 +18,6 @@ class Enrolled {
         if( ! $select['errored'] ) {
             $list = $select['response'];
         }
-        formatted_var_dump($select);
         App::display("enrolled/list.php", [
             'list' => $list,
         ]);
@@ -44,17 +42,11 @@ class Enrolled {
         }
     }
 
-    public static function update() {
-	$showForm = true;
-
-        App::display("enrolled/update.php", []);
-    }
-
     public static function delete() {
         $showForm = true;
-        if( isset($_REQUEST['submitted']) ) {
-        $sid=2;
-        $cid=6;
+        $sid = $_REQUEST['sid'];
+        $cid = $_REQUEST['cid'];
+        if( isset($_REQUEST['submitted']) ) {  
             $delete = DbConn::delete("Enrolled", [], "sid=$sid AND cid=$cid");
             if( ! $delete['errored'] ) {
                 $showForm = false;
@@ -64,7 +56,7 @@ class Enrolled {
             }
         }
         if( $showForm ) {
-            App::display("enrolled/delete.php", []);
+            App::display("enrolled/delete.php", ['sid' => $sid, 'cid' => $cid]);
         }
     }
 

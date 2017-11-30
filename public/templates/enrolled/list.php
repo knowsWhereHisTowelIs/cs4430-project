@@ -3,16 +3,7 @@
 <h1>Enrolled List</h1>
 <ul>
     <li>
-        <a href="/enrolled/list">list</a>
-    </li>
-    <li>
         <a href="/enrolled/insert">Insert</a>
-    </li>
-    <li>
-        <a href="/enrolled/update">Update</a>
-    </li>
-    <li>
-        <a href="/enrolled/delete">Delete</a>
     </li>
 </ul>
 <?php
@@ -28,6 +19,7 @@ if( empty($list) ) {
     foreach($keys as $k) {
         echo "<th>$k</th>";
     }
+    echo "<th>Actions</th>";
     echo "</tr>";
     echo "<tbody>";
     foreach($list as $row) {
@@ -35,6 +27,15 @@ if( empty($list) ) {
         foreach($row as $v) {
             echo "<td>$v</td>";
         }
+        ?>
+        <td>
+            <form method='post' action='/enrolled/delete'>
+                <input type='hidden' name='sid' value="<?=$row['sid']?>" />
+		<input type='hidden' name='cid' value="<?=$row['cid']?>" />
+                <button type='submit'>delete</button>
+            </form>
+        </td>
+        <?php
         echo "</tr>";
     }
     echo "</tbody>";
@@ -43,3 +44,4 @@ if( empty($list) ) {
 ?>
 
 <?php require __DIR__ . '/../footer.php'; ?>
+        
