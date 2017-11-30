@@ -3,6 +3,8 @@
 <h1>Delete Class</h1>
 <form method='post'>
     <p>Are you sure you want to delete?</p>
+
+    <input type="hidden" name="cid" value="<?php echo $cid; ?>" />
     <input name='submitted' type='submit' />
 </form>
 

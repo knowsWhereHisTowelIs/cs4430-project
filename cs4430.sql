@@ -90,7 +90,8 @@ DELIMITER ;
 
 CREATE TABLE `Enrolled` (
   `sid` int(11) NOT NULL,
-  `cid` int(11) NOT NULL
+  `cid` int(11) NOT NULL,
+  UNIQUE (`sid`, `cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
